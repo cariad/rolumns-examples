@@ -1,0 +1,30 @@
+version: 2.1
+
+jobs:
+  lint:
+    docker:
+      - image: cimg/python:3.7
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - pipenv-{{ checksum "Pipfile.lock" }}
+            - pipenv-
+      - run: pipenv sync --dev
+      - run: pipenv run lint
+      - save_cache:
+          key: pipenv-{{ checksum "Pipfile.lock" }}
+          paths:
+            - .venv
+
+workflows:
+  default:
+    jobs:
+      - lint:
+          context:
+            - python
+          filters:
+            branches:
+              only: /.*/
+            tags:
+              only: /.*/
