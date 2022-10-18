@@ -15,7 +15,7 @@ yamllint = "~=1.28"
 [packages]
 openpyxl = "~=3.0"
 requests = "~=2.28"
-rolumns = "~=1.0"
+rolumns = "~=1.1"
 
 [requires]
 python_version = "3.7"
